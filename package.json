@@ -13,6 +13,7 @@
   "author": "xuzengqiang",
   "license": "ISC",
   "devDependencies": {
+    "grunt-cli": "^1.2.0",
     "webpack": "^4.6.0"
   }
 }
