@@ -16,7 +16,7 @@ module.exports = function(grunt) {
                 stripBanners: true,
                 banner:
                     "/**\n" +
-                    " * wapp v<%= pkg.version %> \n" +
+                    " * <%= pkg.name %> v<%= pkg.version %> \n" +
                     " * @copyright www.wicoder.net \n" +
                     " * @date <%= grunt.template.today('yyyy-mm-dd HH:mm:ss') %> \n" +
                     " * @author xuzengqiang <25394113@qq.com>\n" +

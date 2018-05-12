@@ -4,19 +4,49 @@
  * @author xuzengqiang <253948113@qq.com>
  * @date 2018-04-30 10:05:42
  * @version 1.0.0
+ * @description 依赖mui.js和framework.js
  */
-(function(global, factory) {
-    "use strict";
+;(function(global, factory) {
+    factory(global)
+})(typeof window !== 'undefined' ? window : this, function(window) {
+    'use strict'
 
-    factory(global);
-})(typeof window !== "undefined" ? window : this, function(window) {
-    var document = window.document;
-    var location = window.location;
-    var WAPP = {};
+    var document = window.document
+    var location = window.location
+    var WAPP = {}
+
+    /**
+     * APP日志封装
+     * @since 1.0.0
+     */
+    WAPP.logger = (function() {
+        var Logger = {}
+
+        return Logger
+    })()
+
+    /**
+     * APP webview封装
+     * @since 1.0.0
+     */
+    WAPP.webview = (function() {
+        var Webview = {}
+
+        return Webview
+    })()
+
+    /**
+     * APP ajax请求封装
+     * @since 1.0.0
+     */
+    WAPP.ajax = (function() {
+        var Ajax = {}
+        return Ajax
+    })()
 
     /**
      * 对外暴露接口
      * @since 1.0.0
      */
-    window.WAPP = WAPP;
-});
+    window.WAPP = WAPP
+})
