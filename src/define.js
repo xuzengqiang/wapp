@@ -1,3 +1,3 @@
-import { } from './var'
+import './var'
 var wapp = {}
 export default wapp

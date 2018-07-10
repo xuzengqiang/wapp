@@ -1,4 +1,4 @@
-import { } from './var'
 import wapp from './define'
-import webview from './webview'
+import './core'
+import './webview'
 window.wapp = wapp

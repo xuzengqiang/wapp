@@ -9,66 +9,74 @@
   var location = window.location;
 
   /**
-   * @fileoverview 判断是否为低版本Android
-   * @author xuzengqiang
-   * @date 2018-07-10 17:18:50
-   * @description 针对低版本的android.打开webview采用slide-in-right
+   * 低版本Android
+   * @constant
    */
-
-  /*
-   * @fileOverview index.js
-   * @author xuzengqiang
-   * @date 2018-07-10 17:07:59
-   */
+  var LOW_VERSION_ANDROID = 4.4;
 
   var wapp = {};
 
   /**
-   * 获取到所有的webview对象
-   * @author xuzengqiang
-   * @date 2018-07-10 17:28:32
-   * @version 1.0.0
-   * @description 会返回可视和不可视的webview
+   * 统一配置APP窗口打开方式
+   * @description
+   * 在Android 4.4以下,采用'slide-in-right'动画方式,Android 4.4以上以及苹果手机采用'pop-in'方式进入
    */
-  function __webview__all__ () {
-    var webviews = plus.webview.all(),
-      displays = [],
-      hiddens = [];
-
-    webviews.forEach(function (webview) {
-      if (webview.isVisible()) {
-        displays.push(webview);
-      } else {
-        hiddens.push(webview);
-      }
-    });
-
-    return {
-      displays: displays,
-      hiddens: hiddens
-    }
-  }
+  wapp.animate = mui.os.android && parseFloat(mui.os.version) < LOW_VERSION_ANDROID ?
+    'slide-in-right' :
+    'pop-in';
 
   /**
-   * 获取所有显示的webview
-   * @date 2018-07-10 17:45:18
+   * webview模块
+   * @date 2018-07-10 17:58:42
    * @since 1.0.0
    */
-  function __get__display__webviews__ () {
-    return __webview__all__().displays
-  }
-
-  /*
-   * @fileOverview webview模块
-   * @author xuzengqiang
-   * @date 2018-07-10 17:27:47
-   */
-
   wapp.webview = (function () {
     var Webview = {};
 
-    Webview.all = __webview__all__;
-    Webview.getDisplayWebviews = __get__display__webviews__;
+    /**
+     * 获取到所有的webview对象
+     * @date 2018-07-10 17:28:32
+     * @version 1.0.0
+     * @description 会返回可视和不可视的webview
+     */
+    Webview.all = function () {
+      var webviews = plus.webview.all(),
+        displays = [],
+        hiddens = [];
+
+      webviews.forEach(function (webview) {
+        if (webview.isVisible()) {
+          displays.push(webview);
+        } else {
+          hiddens.push(webview);
+        }
+      });
+
+      return {
+        displays: displays,
+        hiddens: hiddens
+      }
+    };
+
+    /**
+     * 获取所有显示的webview
+     * @date 2018-07-10 17:45:18
+     * @since 1.0.0
+     */
+    Webview.getDisplayWebviews = function () {
+      var webviews = Webview.all();
+      return webviews.displays
+    };
+
+    /**
+     * 获取所有隐藏的webview
+     * @date 2018-07-10 18:02:00
+     * @since 1.0.0
+     */
+    Webview.getHiddenWebviews = function () {
+      var webviews = Webview.all();
+      return webviews.hiddens
+    };
 
     return Webview
   })();
