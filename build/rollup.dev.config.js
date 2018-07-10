@@ -1,7 +1,8 @@
 /**
- * @fileoverview rollup配置文件
+ * @fileoverview rollup开发环境配置
  * @author xuzengqiang
- * @date 2018-07-10 16:18:36
+ * @date 2018-07-10 16:59:27
+ * @version 1.0.0
  */
 export default {
   /**
@@ -12,7 +13,7 @@ export default {
    * rollup输出配置
    */
   output: {
-    file: 'wapp.js',
+    file: 'dist/wapp.js',
     /**
      * 生成包的格式
      * @description 支持
@@ -25,3 +26,4 @@ export default {
     format: 'umd'
   }
 }
+
