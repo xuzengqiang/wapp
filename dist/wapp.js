@@ -5,61 +5,74 @@
 }(this, (function () { 'use strict';
 
   var document = window.document;
+
   var location = window.location;
-  var WAPP = {};
 
   /**
-   * APP日志封装
-   * @since 1.0.0
+   * @fileoverview 判断是否为低版本Android
+   * @author xuzengqiang
+   * @date 2018-07-10 17:18:50
+   * @description 针对低版本的android.打开webview采用slide-in-right
    */
-  WAPP.logger = (function () {
-    var Logger = {};
 
-    return Logger
-  })();
+  /*
+   * @fileOverview index.js
+   * @author xuzengqiang
+   * @date 2018-07-10 17:07:59
+   */
+
+  var wapp = {};
 
   /**
-   * APP webview封装
+   * 获取到所有的webview对象
+   * @author xuzengqiang
+   * @date 2018-07-10 17:28:32
+   * @version 1.0.0
+   * @description 会返回可视和不可视的webview
+   */
+  function __webview__all__ () {
+    var webviews = plus.webview.all(),
+      displays = [],
+      hiddens = [];
+
+    webviews.forEach(function (webview) {
+      if (webview.isVisible()) {
+        displays.push(webview);
+      } else {
+        hiddens.push(webview);
+      }
+    });
+
+    return {
+      displays: displays,
+      hiddens: hiddens
+    }
+  }
+
+  /**
+   * 获取所有显示的webview
+   * @date 2018-07-10 17:45:18
    * @since 1.0.0
    */
-  WAPP.webview = (function () {
+  function __get__display__webviews__ () {
+    return __webview__all__().displays
+  }
+
+  /*
+   * @fileOverview webview模块
+   * @author xuzengqiang
+   * @date 2018-07-10 17:27:47
+   */
+
+  wapp.webview = (function () {
     var Webview = {};
+
+    Webview.all = __webview__all__;
+    Webview.getDisplayWebviews = __get__display__webviews__;
 
     return Webview
   })();
 
-  /**
-   * APP网络请求封装
-   * @since 1.0.0
-   */
-  WAPP.network = (function () {
-    var Network = {};
-
-    return Network
-  })();
-
-  /**
-   * APP ajax请求封装
-   * @since 1.0.0
-   */
-  WAPP.ajax = (function () {
-    var Ajax = {};
-    return Ajax
-  })();
-
-  /**
-   * APP文件操作
-   * @since 1.0.0
-   */
-  WAPP.file = (function () {
-    var File = {};
-    return File
-  })();
-
-  /**
-   * 对外暴露接口
-   * @since 1.0.0
-   */
-  window.WAPP = WAPP;
+  window.wapp = wapp;
 
 })));
